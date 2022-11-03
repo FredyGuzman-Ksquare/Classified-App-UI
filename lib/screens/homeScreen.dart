@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
             Navigator.pushNamed(context, "/settings");
           },
           child: CircleAvatar(
-            backgroundImage: AssetImage('graphics/logo.png'),
+            backgroundImage: AssetImage('graphics/logo.jpg'),
             backgroundColor: Color.fromARGB(255, 248, 248, 248),
             radius: 20,
           ),

@@ -20,12 +20,17 @@ class _MyWidgetState extends State<EditProfileScreen> {
         appBar: AppBar(
           title: Text('Edit Profile'),
           centerTitle: true,
-          leading: Icon(Icons.arrow_back),
+          leading: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Icon(Icons.arrow_back)),
           backgroundColor: Colors.black,
         ),
         backgroundColor: Colors.white,
         body: Center(
             child: Container(
+          padding: EdgeInsets.only(left: 20),
           width: 350,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,9 +39,9 @@ class _MyWidgetState extends State<EditProfileScreen> {
                 height: 15,
               ),
               CircleAvatar(
-                backgroundImage: AssetImage('graphics/logo.png'),
+                backgroundImage: AssetImage('graphics/logo.jpg'),
                 backgroundColor: Colors.black,
-                radius: 50,
+                radius: 75,
               ),
               const SizedBox(
                 height: 15,
@@ -87,7 +92,9 @@ class _MyWidgetState extends State<EditProfileScreen> {
                 height: 70,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   style: ButtonStyle(
                     padding: MaterialStateProperty.all<EdgeInsets>(
                         const EdgeInsets.only(
@@ -108,7 +115,9 @@ class _MyWidgetState extends State<EditProfileScreen> {
                 height: 70,
                 width: double.infinity,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, "/login");
+                  },
                   style: ButtonStyle(
                     padding: MaterialStateProperty.all<EdgeInsets>(
                         const EdgeInsets.only(

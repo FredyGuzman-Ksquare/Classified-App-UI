@@ -17,106 +17,126 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Ads Listing'), actions: []),
+        appBar: AppBar(
+            title: Text('Ads Listing'),
+            leading: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Icon(Icons.arrow_back))),
         body: Center(
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage('graphics/logo.png'),
-                    backgroundColor: Color.fromARGB(255, 248, 248, 248),
-                    radius: 20,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        "Fredy",
-                        style: TextStyle(
-                            fontSize: 22, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        "9621894299",
-                        style:
-                            TextStyle(fontSize: 18, color: Color(0xff898888)),
-                      )
-                    ],
-                  ),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, "/editprofile");
-                      },
-                      child: Text('Edit',
+          child: Container(
+            padding: EdgeInsets.only(left: 25, top: 25),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: AssetImage('graphics/logo.jpg'),
+                      backgroundColor: Color.fromARGB(255, 248, 248, 248),
+                      radius: 20,
+                    ),
+                    SizedBox(width: 20),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          "Fredy",
                           style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xffF25723))))
-                ],
-              ),
-              SizedBox(height: 50),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, "/myads");
-                },
-                child: Container(
-                  padding: const EdgeInsets.only(top: 20, bottom: 20, left: 20),
-                  child: Row(
-                    children: const [
-                      Icon(
-                          size: 40,
-                          color: Color(0xff898888),
-                          Icons.playlist_add),
-                      SizedBox(width: 40),
-                      Text("My Ads",
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold)),
-                    ],
+                              fontSize: 22, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          "9621894299",
+                          style:
+                              TextStyle(fontSize: 18, color: Color(0xff898888)),
+                        )
+                      ],
+                    ),
+                    SizedBox(width: 120),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/editprofile");
+                        },
+                        child: Text('Edit',
+                            style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w700,
+                                color: Color(0xffF25723))))
+                  ],
+                ),
+                SizedBox(height: 50),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, "/myads");
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.only(
+                      top: 20,
+                      bottom: 20,
+                    ),
+                    child: Row(
+                      children: const [
+                        Icon(
+                            size: 40,
+                            color: Color(0xff898888),
+                            Icons.playlist_add),
+                        SizedBox(width: 40),
+                        Text("My Ads",
+                            style: TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.bold)),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  openURL('https://appmaking.com/about/');
-                },
-                child: Container(
-                  padding: const EdgeInsets.only(top: 20, bottom: 20, left: 20),
-                  child: Row(
-                    children: const [
-                      Icon(
-                          size: 40,
-                          color: Color(0xff898888),
-                          Icons.person_outline),
-                      SizedBox(width: 40),
-                      Text("My Ads",
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold)),
-                    ],
+                GestureDetector(
+                  onTap: () {
+                    openURL('https://appmaking.com/about/');
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.only(
+                      top: 20,
+                      bottom: 20,
+                    ),
+                    child: Row(
+                      children: const [
+                        Icon(
+                            size: 40,
+                            color: Color(0xff898888),
+                            Icons.person_outline),
+                        SizedBox(width: 40),
+                        Text("About Us",
+                            style: TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.bold)),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  openURL("https://appmaking.com/contact");
-                },
-                child: Container(
-                  padding: const EdgeInsets.only(top: 20, bottom: 20, left: 20),
-                  child: Row(
-                    children: const [
-                      Icon(
-                          size: 40,
-                          color: Color(0xff898888),
-                          Icons.contact_phone_outlined),
-                      SizedBox(width: 40),
-                      Text("My Ads",
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold)),
-                    ],
+                GestureDetector(
+                  onTap: () {
+                    openURL("https://appmaking.com/contact");
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.only(
+                      top: 20,
+                      bottom: 20,
+                    ),
+                    child: Row(
+                      children: const [
+                        Icon(
+                            size: 40,
+                            color: Color(0xff898888),
+                            Icons.contact_phone_outlined),
+                        SizedBox(width: 40),
+                        Text("Contact Us",
+                            style: TextStyle(
+                                fontSize: 22, fontWeight: FontWeight.bold)),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ));
   }

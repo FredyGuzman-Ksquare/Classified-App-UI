@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -22,6 +23,13 @@ class _ProductDetailState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          leading: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Icon(Icons.arrow_back)),
+        ),
         backgroundColor: Colors.white,
         body: Container(
             child: Column(
@@ -44,7 +52,7 @@ class _ProductDetailState extends State<ProductDetailScreen> {
               child: Text(widget.product["product"]["price"].toString() + ".0",
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                      color: Colors.black,
+                      color: Color(0xffF25723),
                       fontSize: 18,
                       fontWeight: FontWeight.w600)),
             ),
@@ -59,7 +67,7 @@ class _ProductDetailState extends State<ProductDetailScreen> {
                   child: Image.network(widget.product["product"]["images"][0])),
             ),
             SizedBox(
-              height: 50,
+              height: 10,
             ),
             Container(
               margin: EdgeInsets.only(left: 15, right: 15),
@@ -111,7 +119,7 @@ class _ProductDetailState extends State<ProductDetailScreen> {
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
-                      fontWeight: FontWeight.w300)),
+                      fontWeight: FontWeight.w400)),
             ),
             SizedBox(
               height: 15,

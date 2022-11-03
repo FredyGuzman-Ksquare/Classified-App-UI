@@ -20,7 +20,11 @@ class _MyWidgetState extends State<CreateAdScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Create Ad'),
-          leading: Icon(Icons.arrow_back),
+          leading: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Icon(Icons.arrow_back)),
           centerTitle: true,
           backgroundColor: Colors.black,
         ),
@@ -105,7 +109,9 @@ class _MyWidgetState extends State<CreateAdScreen> {
                 height: 70,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   style: ButtonStyle(
                     padding: MaterialStateProperty.all<EdgeInsets>(
                         const EdgeInsets.only(

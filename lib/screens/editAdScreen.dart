@@ -28,9 +28,12 @@ class _MyWidgetState extends State<EditAdScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Edit Ad'),
-          leading: Icon(Icons.arrow_back),
+          leading: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Icon(Icons.arrow_back)),
           centerTitle: true,
-          backgroundColor: Colors.black,
         ),
         backgroundColor: Colors.white,
         body: Center(
@@ -124,7 +127,9 @@ class _MyWidgetState extends State<EditAdScreen> {
                 height: 70,
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context, '/home');
+                  },
                   style: ButtonStyle(
                     padding: MaterialStateProperty.all<EdgeInsets>(
                         const EdgeInsets.only(

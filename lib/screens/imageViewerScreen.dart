@@ -36,7 +36,7 @@ class _ImageViewerScreenState extends State<ImageViewerScreen> {
           width: double.infinity,
           height: double.infinity,
           child: Center(
-              child: Image.asset(
+              child: Image.network(
             widget.images["images"][itemIndex],
             width: 235,
             height: 200,

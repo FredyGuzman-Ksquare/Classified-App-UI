@@ -128,7 +128,7 @@ class _MyWidgetState extends State<RegisterScreen> {
                 width: double.infinity,
                 child: TextButton(
                   onPressed: () {
-                    context.go('/');
+                    Navigator.pushNamed(context, "/login");
                   },
                   style: ButtonStyle(
                     padding: MaterialStateProperty.all<EdgeInsets>(
