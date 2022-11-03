@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../custom_widgets/AppImagePicker.dart';
+import '../custom_widgets/appImagePicker.dart';
 
 class CreateAdScreen extends StatefulWidget {
   const CreateAdScreen({super.key});

@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-import '../custom_widgets/AppImagePicker.dart';
+import '../custom_widgets/appImagePicker.dart';
+import '../custom_widgets/imageSelect.dart';
 
 class EditAdScreen extends StatefulWidget {
-  const EditAdScreen({super.key});
+  dynamic product;
+  EditAdScreen({super.key, required this.product});
+
+  _openURL(url) async {
+    url = Uri.parse(url);
+
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      print("Error");
+    }
+  }
 
   @override
   State<EditAdScreen> createState() => _MyWidgetState();
 }
 
 class _MyWidgetState extends State<EditAdScreen> {
-  TextEditingController _nameCtrl =
-      TextEditingController(text: 'Used Macbook Pro for Sale');
-  TextEditingController _priceCtrl = TextEditingController(text: '45000');
-  TextEditingController _mobileCtrl =
-      TextEditingController(text: '+52 1 9621894299');
-  TextEditingController _descriptionCtrl = TextEditingController(
-      text: 'alidafaoifldfjkgkjdlfghdflkdhfdajkslfhdakjlfhkasldfhklsdaf');
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,15 +50,25 @@ class _MyWidgetState extends State<EditAdScreen> {
                       boxShadow: [BoxShadow(color: Colors.blueAccent)]),
                   padding: EdgeInsets.all(24.0),
                   child: AppImagePicker()),
-              const SizedBox(
-                height: 15,
+              SizedBox(
+                width: 400,
+                height: 90,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: widget.product["product"]["images"].length,
+                  itemBuilder: ((context, index) {
+                    return ImageSelect(
+                      img: widget.product["product"]["images"][index],
+                    );
+                  }),
+                ),
               ),
-              TextField(
-                controller: _nameCtrl,
+              TextFormField(
+                initialValue: widget.product["product"]["title"],
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(0))),
-                    labelText: "Name",
+                    labelText: "Title",
                     labelStyle: TextStyle(
                         fontSize: 25,
                         color: Color.fromARGB(255, 230, 230, 230),
@@ -62,8 +77,8 @@ class _MyWidgetState extends State<EditAdScreen> {
               const SizedBox(
                 height: 15,
               ),
-              TextField(
-                controller: _priceCtrl,
+              TextFormField(
+                initialValue: widget.product["product"]["price"].toString(),
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(0))),
@@ -76,8 +91,8 @@ class _MyWidgetState extends State<EditAdScreen> {
               const SizedBox(
                 height: 15,
               ),
-              TextField(
-                controller: _mobileCtrl,
+              TextFormField(
+                initialValue: widget.product["product"]["mobile"],
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(0))),
@@ -90,8 +105,9 @@ class _MyWidgetState extends State<EditAdScreen> {
               const SizedBox(
                 height: 15,
               ),
-              TextField(
-                controller: _descriptionCtrl,
+              TextFormField(
+                initialValue: widget.product["product"]["description"],
+                maxLines: 3,
                 decoration: const InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(0))),

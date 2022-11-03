@@ -72,13 +72,7 @@ class _MyWidgetState extends State<LoginScreen> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () async {
-                    await Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomeScreen(),
-                        // Set the data here
-                      ),
-                    );
+                    Navigator.pushReplacementNamed(context, "/");
                   },
                   style: ButtonStyle(
                     padding: MaterialStateProperty.all<EdgeInsets>(
@@ -104,7 +98,7 @@ class _MyWidgetState extends State<LoginScreen> {
                 width: double.infinity,
                 child: TextButton(
                   onPressed: () {
-                    context.go('/Register');
+                    Navigator.pushNamed(context, "/register");
                   },
                   style: ButtonStyle(
                     padding: MaterialStateProperty.all<EdgeInsets>(

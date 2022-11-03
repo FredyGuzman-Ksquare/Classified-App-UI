@@ -1,41 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/custom_widgets/adCard.dart';
 
+import '../data/products.dart';
+
 class MyAdsScreen extends StatelessWidget {
   MyAdsScreen({super.key});
-
-  List textLines = [
-    {
-      "title": "iPod for Sale",
-      "time": "5 mins ago",
-      "price": 500,
-      "imageURL": "graphics/airpods.jpg",
-    },
-    {
-      "title": "Samsung A1 for Sale",
-      "time": "8 mins ago",
-      "price": 300,
-      "imageURL": "graphics/airpods.jpg",
-    },
-    {
-      "title": "iMac for Sale",
-      "time": "50 mins ago",
-      "price": 2500,
-      "imageURL": "graphics/airpods.jpg",
-    },
-    {
-      "title": "Moto G5 A1 for Sale",
-      "time": "23 hours ago",
-      "price": 100,
-      "imageURL": "graphics/airpods.jpg",
-    },
-    {
-      "title": "Yeti Mic A1 for Sale",
-      "time": "2 days ago",
-      "price": 100,
-      "imageURL": "graphics/airpods.jpg",
-    },
-  ];
+  final textLines = Products();
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +19,20 @@ class MyAdsScreen extends StatelessWidget {
         Container(
           child: Expanded(
             child: ListView.builder(
-                itemCount: textLines.length,
+                itemCount: textLines.ads.length,
                 itemBuilder: ((context, index) {
-                  return AdCard(
-                    title: textLines[index]['title'],
-                    time: textLines[index]['time'],
-                    price: textLines[index]['price'],
-                    imageURL: textLines[index]['imageURL'],
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, "/editad", arguments: {
+                        "product": textLines.ads[index],
+                      });
+                    },
+                    child: AdCard(
+                      title: textLines.ads[index]['title'],
+                      time: textLines.ads[index]['createdAt'],
+                      price: textLines.ads[index]['price'],
+                      imageURL: textLines.ads[index]['images'][0],
+                    ),
                   );
                 })),
           ),

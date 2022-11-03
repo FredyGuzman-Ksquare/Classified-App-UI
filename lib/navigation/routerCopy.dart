@@ -1,88 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/screens/createAdScreen.dart';
 import 'package:flutter_project/screens/editProfileScreen.dart';
+import 'package:flutter_project/screens/imageViewerScreen.dart';
 import 'package:flutter_project/screens/registerScreen.dart';
 import 'package:flutter_project/screens/loginScreen.dart';
+import 'package:flutter_project/screens/settingsScreen.dart';
 import 'package:go_router/go_router.dart';
 import '../screens/editAdScreen.dart';
 import '../screens/homeScreen.dart';
 import '../screens/myAddsScreen.dart';
+import '../screens/productDetailScreen.dart';
 
-final router = GoRouter(initialLocation: '/', routes: [
-  GoRoute(
-    path: '/',
-    pageBuilder: (context, state) {
-      return MaterialPage(
-        child: LoginScreen(),
-      );
-    },
-  ),
-  GoRoute(
-    path: '/Register',
-    pageBuilder: (context, state) {
-      return MaterialPage(
-        child: RegisterScreen(),
-      );
-    },
-  ),
-  GoRoute(
-    path: '/Home',
-    pageBuilder: (context, state) {
-      return MaterialPage(
-        child: HomeScreen(),
-      );
-    },
-  ),
-  GoRoute(
-    path: '/Settings',
-    pageBuilder: (context, state) {
-      return MaterialPage(
-        child: HomeScreen(),
-      );
-    },
-  ),
-  GoRoute(
-    path: '/EditProfile',
-    pageBuilder: (context, state) {
-      return MaterialPage(
-        child: EditProfileScreen(),
-      );
-    },
-  ),
-  GoRoute(
-    path: '/MyAdds',
-    pageBuilder: (context, state) {
-      return MaterialPage(
-        child: MyAdsScreen(),
-      );
-    },
-  ),
-  GoRoute(
-    path: '/EditAd',
-    pageBuilder: (context, state) {
-      return MaterialPage(
-        child: EditAdScreen(
-            //data: state.extra as Map,
-            ),
-      );
-    },
-  ),
-  GoRoute(
-    path: '/ProductDetail',
-    pageBuilder: (context, state) {
-      return MaterialPage(
-        child: EditAdScreen(
-            //data: state.extra as Map,
-            ),
-      );
-    },
-  ),
-  GoRoute(
-    path: '/CreateAd',
-    pageBuilder: (context, state) {
-      return MaterialPage(
-        child: CreateAdScreen(),
-      );
-    },
-  ),
-]);
+class RouteGenerator {
+  var generateRoute = ((settings) {
+    var routeName = settings.name;
+    var args = settings.arguments;
+    switch (routeName) {
+      case '/':
+        return MaterialPageRoute(builder: (context) => HomeScreen());
+
+      case '/login':
+        return MaterialPageRoute(builder: (context) => LoginScreen());
+
+      case '/settings':
+        return MaterialPageRoute(builder: (context) => SettingsScreen());
+
+      case '/editprofile':
+        return MaterialPageRoute(builder: (context) => EditProfileScreen());
+
+      case '/myads':
+        return MaterialPageRoute(builder: (context) => MyAdsScreen());
+
+      case '/register':
+        return MaterialPageRoute(builder: (context) => RegisterScreen());
+
+      case '/createad':
+        return MaterialPageRoute(builder: (context) => CreateAdScreen());
+
+      case '/productdetail':
+        return MaterialPageRoute(
+            builder: (context) => ProductDetailScreen(product: args));
+
+      case '/editad':
+        return MaterialPageRoute(
+            builder: (context) => EditAdScreen(product: args));
+
+      case '/imageviewer':
+        return MaterialPageRoute(
+            builder: (context) => ImageViewerScreen(images: args));
+    }
+  });
+}
