@@ -5,7 +5,8 @@
 
 ### 1. Login Screen
 <div style="width:300px">
-![Login](./screenshots/01_Login.jpg)
+<img src="https://github.com/FredyGuzman-Ksquare/Classified-App-UI/blob/main/screenshots/01_Login.jpg?raw=true" width="70%">
+
 
 ### 2. Register Screen
 <div style="width:300px">
