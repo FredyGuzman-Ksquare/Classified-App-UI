@@ -70,28 +70,35 @@ class _LoginScreenState extends State<LoginScreen1> {
                         const SizedBox(
                           height: 20,
                         ),
-                        SizedBox(
-                          height: 56,
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            style:
-                                CustomButton().loginRegisterButton(_isLoading),
-                            child: CustomCircularProgress()
-                                .customCPIContainer(_isLoading, true),
-                            onPressed: () {
-                              login();
-                            },
+                        Container(
+                          margin: EdgeInsets.only(left: 15, right: 15),
+                          child: SizedBox(
+                            height: 56,
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              style: CustomButton()
+                                  .loginRegisterButton(_isLoading),
+                              child: CustomCircularProgress()
+                                  .customCPIContainer(_isLoading, true),
+                              onPressed: () {
+                                login();
+                              },
+                            ),
                           ),
                         ),
                         const SizedBox(
                           height: 12,
                         ),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/register');
-                            },
-                            style: CustomButton().loginRegisterButton(true),
-                            child: CustomText().accountText(true)),
+                        Container(
+                          margin: EdgeInsets.only(left: 15, right: 15),
+                          child: TextButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/register');
+                              },
+                              style: ButtonStyle(
+                                  padding: CustomButton().buttonPadding()),
+                              child: CustomText().accountText(true)),
+                        ),
                       ],
                     ),
                   ],

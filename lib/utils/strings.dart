@@ -1,8 +1,8 @@
 class Strings {
   Strings._();
-  static const String profileName = "Fredy";
-  static const String profileFullName = "Fredy Guzmán";
-  static const String profileEmail = "fredyogr@demo.com";
+  static const String profileName = "John Doe";
+  static const String profileFullName = "John Doe";
+  static const String profileEmail = "johndoe@demo.com";
   static const String profilePhone = "3692483453";
   static const String profileFullPhone = "+52 1 3692483453";
   static const String myAds = "My Ads";

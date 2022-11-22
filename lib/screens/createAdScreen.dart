@@ -1,10 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_project/custom_widgets/customText.dart';
-
+import 'package:flutter_project/services/ads.dart';
+import 'package:http/http.dart';
+import 'package:image_picker/image_picker.dart';
+import '../model/ads.dart';
 import '../custom_widgets/appImagePicker.dart';
 import '../custom_widgets/customButton.dart';
 import '../custom_widgets/textFormField.dart';
+import '../utils/constants.dart';
 import '../utils/strings.dart';
+import 'package:http/http.dart' as http;
 
 class CreateAdScreen extends StatefulWidget {
   const CreateAdScreen({super.key});
@@ -14,11 +21,60 @@ class CreateAdScreen extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<CreateAdScreen> {
-  TextEditingController _nameCtrl = TextEditingController();
+  TextEditingController _titleCtrl = TextEditingController();
   TextEditingController _priceCtrl = TextEditingController();
   TextEditingController _mobileCtrl = TextEditingController();
   TextEditingController _descriptionCtrl = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final List<String> _errorPics = [
+    Constants.defaultImage,
+  ];
+  List<dynamic> _imagePath = [];
+  List<String> _imageServerPath = [];
+  bool _isLoading = false;
+  void captureImageFromGallery() async {
+    var files = await ImagePicker().pickMultiImage();
+    if (files.isNotEmpty) {
+      _uploadMultitpleFiles(files);
+    }
+  }
+
+  _uploadMultitpleFiles(List<XFile> files) async {
+    var url = Uri.parse("${Constants().serverUrl}/upload/photos");
+    var request = http.MultipartRequest('POST', url);
+    files.forEach((file) async {
+      MultipartFile images =
+          await http.MultipartFile.fromPath('photos', file.path);
+      request.files.add(images);
+    });
+    var response = await request.send();
+    var resp = await response.stream.bytesToString();
+    //print(resp);
+    var respJson = jsonDecode(resp);
+    setState(() {
+      _imagePath = respJson['data']['path'];
+      _imageServerPath = _imagePath.map((str) => str.toString()).toList();
+      //print(_imageServerPath);
+    });
+  }
+
+  void creatAd() async {
+    var ad = Ad(
+        title: _titleCtrl.text,
+        mobile: _mobileCtrl.text,
+        price: num.parse(_priceCtrl.text),
+        description: _descriptionCtrl.text,
+        images: _imageServerPath.isNotEmpty ? _imageServerPath : _errorPics);
+    await Future.delayed(const Duration(milliseconds: 500));
+    setState(() {
+      AdService().createPost(context, ad);
+      _isLoading = false;
+    });
+    if (_isLoading) return;
+    setState(() {
+      _isLoading = true;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +111,7 @@ class _MyWidgetState extends State<CreateAdScreen> {
               const SizedBox(
                 height: 15,
               ),
-              CustomTextForm().generalTextField(_nameCtrl, 'name'),
+              CustomTextForm().generalTextField(_titleCtrl, 'title'),
               const SizedBox(
                 height: 15,
               ),

@@ -10,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import '../custom_widgets/textFormField.dart';
 import '../model/ads.dart';
 import '../services/ads.dart';
+import '../utils/constants.dart';
 import '../utils/strings.dart';
 
 class EditAdScreen extends StatefulWidget {

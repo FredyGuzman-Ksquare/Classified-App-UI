@@ -12,9 +12,8 @@ class CustomButton {
     return ButtonStyle(
       padding: buttonPadding(),
       backgroundColor: _loading
-          ? MaterialStateProperty.all<Color>(const Color(0xffF25723))
-          : MaterialStateProperty.all<Color>(
-              Color.fromARGB(255, 104, 104, 104)),
+          ? MaterialStateProperty.all<Color>(Color.fromARGB(255, 104, 104, 104))
+          : MaterialStateProperty.all<Color>(const Color(0xffF25723)),
     );
   }
 

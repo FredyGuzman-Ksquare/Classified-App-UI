@@ -17,10 +17,13 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<RegisterScreen> {
-  TextEditingController _nameCtrl = TextEditingController();
-  TextEditingController _emailCtrl = TextEditingController();
-  TextEditingController _mobileCtrl = TextEditingController();
-  TextEditingController _passwordCtrl = TextEditingController();
+  TextEditingController _nameCtrl =
+      TextEditingController(text: Strings.profileName);
+  TextEditingController _emailCtrl =
+      TextEditingController(text: Strings.profileEmail);
+  TextEditingController _mobileCtrl =
+      TextEditingController(text: Strings.profileFullPhone);
+  TextEditingController _passwordCtrl = TextEditingController(text: "1234");
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
 
@@ -46,85 +49,88 @@ class _MyWidgetState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(
-              height: 260,
-              width: double.infinity,
-              child: const Image(
-                image: AssetImage('graphics/flowers.jpg'),
-                fit: BoxFit.fill,
+      body: Form(
+        key: _formKey,
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(
+                height: 260,
                 width: double.infinity,
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 15, right: 15),
-              child: CustomTextForm().generalTextField(_emailCtrl, 'name'),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 15, right: 15),
-              child: CustomTextForm().generalTextField(_emailCtrl, 'email'),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 15, right: 15),
-              child: CustomTextForm().generalTextField(_mobileCtrl, 'phone'),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 15, right: 15),
-              child: CustomTextForm().passwordTextField(_passwordCtrl),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 15, right: 15),
-              child: SizedBox(
-                height: 70,
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    register();
-                  },
-                  style: CustomButton().loginRegisterButton(_isLoading),
-                  child: CustomCircularProgress()
-                      .customCPIContainer(_isLoading, false),
+                child: const Image(
+                  image: AssetImage('graphics/flowers.jpg'),
+                  fit: BoxFit.fill,
+                  width: double.infinity,
                 ),
               ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Container(
-              margin: EdgeInsets.only(left: 15, right: 15),
-              child: SizedBox(
-                height: 70,
-                width: double.infinity,
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, "/login");
-                  },
-                  style: ButtonStyle(
-                    padding: CustomButton().buttonPadding(),
+              SizedBox(
+                height: 30,
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 15, right: 15),
+                child: CustomTextForm().generalTextField(_nameCtrl, 'name'),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 15, right: 15),
+                child: CustomTextForm().generalTextField(_emailCtrl, 'email'),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 15, right: 15),
+                child: CustomTextForm().generalTextField(_mobileCtrl, 'phone'),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 15, right: 15),
+                child: CustomTextForm().passwordTextField(_passwordCtrl),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 15, right: 15),
+                child: SizedBox(
+                  height: 56,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      register();
+                    },
+                    style: CustomButton().loginRegisterButton(_isLoading),
+                    child: CustomCircularProgress()
+                        .customCPIContainer(_isLoading, false),
                   ),
-                  child: CustomText().accountText(false),
                 ),
               ),
-            ),
-          ]),
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 15, right: 15),
+                child: SizedBox(
+                  height: 56,
+                  width: double.infinity,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/login");
+                    },
+                    style: ButtonStyle(
+                      padding: CustomButton().buttonPadding(),
+                    ),
+                    child: CustomText().accountText(false),
+                  ),
+                ),
+              ),
+            ]),
+      ),
     );
   }
 }
