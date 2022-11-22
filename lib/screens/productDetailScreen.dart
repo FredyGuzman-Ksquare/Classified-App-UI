@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/custom_widgets/customButton.dart';
+import 'package:flutter_project/utils/dateCalculator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../utils/strings.dart';
+import '../utils/urlLauncher.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   dynamic product;
   ProductDetailScreen({super.key, required this.product});
-  _openURL(url) async {
-    url = Uri.parse(url);
-
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url);
-    } else {
-      print("Error");
-    }
-  }
-
   @override
   State<ProductDetailScreen> createState() => _ProductDetailState();
 }
@@ -33,12 +28,12 @@ class _ProductDetailState extends State<ProductDetailScreen> {
         backgroundColor: Colors.white,
         body: Container(
             child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(left: 20),
-              child: Text(widget.product["product"]["title"],
+              padding: EdgeInsets.only(left: 20, top: 20),
+              child: Text(widget.product["product"].title!,
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 25,
@@ -49,7 +44,7 @@ class _ProductDetailState extends State<ProductDetailScreen> {
             ),
             Container(
               padding: EdgeInsets.only(left: 20),
-              child: Text(widget.product["product"]["price"].toString() + ".0",
+              child: Text(widget.product["product"].price!.toString() + ".0",
                   textAlign: TextAlign.left,
                   style: TextStyle(
                       color: Color(0xffF25723),
@@ -61,10 +56,10 @@ class _ProductDetailState extends State<ProductDetailScreen> {
               child: GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, "/imageviewer", arguments: {
-                      "images": widget.product["product"]["images"],
+                      "images": widget.product["product"].images!,
                     });
                   },
-                  child: Image.network(widget.product["product"]["images"][0])),
+                  child: Image.network(widget.product["product"].images![0])),
             ),
             SizedBox(
               height: 10,
@@ -82,7 +77,10 @@ class _ProductDetailState extends State<ProductDetailScreen> {
                     SizedBox(
                       width: 2,
                     ),
-                    Text(widget.product["product"]["createdBy"],
+                    Text(
+                        DateCalculator()
+                            .daysAgo(widget.product.createdAt.toString())
+                            .toString(),
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 18,
@@ -115,7 +113,6 @@ class _ProductDetailState extends State<ProductDetailScreen> {
             Container(
               margin: EdgeInsets.only(left: 15, right: 15),
               child: Text(widget.product["product"]["description"],
-                  textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
@@ -129,16 +126,15 @@ class _ProductDetailState extends State<ProductDetailScreen> {
               padding: EdgeInsets.only(left: 15, right: 15),
               child: ElevatedButton(
                 onPressed: () {
-                  widget._openURL(
+                  UrlLauncher().openURL(
                       "tel:+${widget.product["product"]["contactNumber"]}");
                 },
                 style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.only(
-                        top: 25, bottom: 25, right: 25, left: 25),
+                    padding: CustomButton().buttonPadding(),
                     backgroundColor: Color(0xffF25723),
                     minimumSize: Size(150, 50)),
                 child: const Text(
-                  'Contact Seller',
+                  Strings.contactSeller,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 25,

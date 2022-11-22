@@ -8,6 +8,7 @@ import 'package:flutter_project/screens/settingsScreen.dart';
 import 'package:go_router/go_router.dart';
 import '../screens/editAdScreen.dart';
 import '../screens/homeScreen.dart';
+import '../screens/loginScreen2.dart';
 import '../screens/myAddsScreen.dart';
 import '../screens/productDetailScreen.dart';
 
@@ -20,13 +21,16 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (context) => HomeScreen());
 
       case '/login':
-        return MaterialPageRoute(builder: (context) => LoginScreen());
+        return MaterialPageRoute(builder: (context) => LoginScreen1());
 
       case '/settings':
         return MaterialPageRoute(builder: (context) => SettingsScreen());
 
       case '/editprofile':
-        return MaterialPageRoute(builder: (context) => EditProfileScreen());
+        return MaterialPageRoute(
+            builder: (context) => EditProfileScreen(
+                  data: args,
+                ));
 
       case '/myads':
         return MaterialPageRoute(builder: (context) => MyAdsScreen());

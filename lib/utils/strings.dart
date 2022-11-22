@@ -1,0 +1,38 @@
+class Strings {
+  Strings._();
+  static const String profileName = "Fredy";
+  static const String profileFullName = "Fredy Guzmán";
+  static const String profileEmail = "fredyogr@demo.com";
+  static const String profilePhone = "3692483453";
+  static const String profileFullPhone = "+52 1 3692483453";
+  static const String myAds = "My Ads";
+  static const String adsListing = "Ads Listing";
+  static const String createAd = "Create Ad";
+  static const String edit = "Edit";
+  static const String editAd = "Edit Ad";
+  static const String editProfile = "Edit Profile";
+  static const String updateProfile = "Update Profile";
+  static const String submitAd = "Submit Ad";
+  static const String login = "Login";
+  static const String startingSession = "Starting sesion";
+  static const String logout = "Logout";
+  static const String registerNow = "Register Now";
+  static const String registering = "Registering...";
+  static const String alreadyHaveAccount = "Already have an account?";
+  static const String dontHaveAccount = "Don't have any account?";
+  static const String contactUs = "Contact Us";
+  static const String aboutUs = "About Us";
+  static const String email = "Email";
+  static const String name = "Name";
+  static const String password = "Password";
+  static const String mobile = "Mobile";
+  static const String price = "Price";
+  static const String title = "Title";
+  static const String description = "Description";
+  static const String contactNumber = "Contact Number";
+  static const String contactSeller = "Contact Seller";
+  static const String captureCamera = "Capture  Camera";
+  static const String captureGallery = "Capture  Gallery";
+  static const String appMakingContact = "https://appmaking.com/contact";
+  static const String appMakingAbout = 'https://appmaking.com/about/';
+}

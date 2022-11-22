@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/custom_widgets/productCard.dart';
-import 'package:flutter_project/data/products.dart';
+import 'package:flutter_project/model/products.dart';
+
+import '../custom_widgets/customCircleAvatar.dart';
+import '../model/ads.dart';
+import '../services/ads.dart';
+import '../utils/strings.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -10,42 +15,48 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Ads Listing'), actions: [
-        GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(context, "/settings");
-          },
-          child: CircleAvatar(
-            backgroundImage: AssetImage('graphics/logo.jpg'),
-            backgroundColor: Color.fromARGB(255, 248, 248, 248),
-            radius: 20,
-          ),
-        ),
-      ]),
+      appBar: AppBar(
+          title: Text(Strings.adsListing),
+          actions: [CustomCircleAvatar().customProfileAvatar(context)]),
       body: Center(
         child: SizedBox(
-          child: GridView.builder(
-            padding: EdgeInsets.fromLTRB(20, 15, 15, 15),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 15,
-                childAspectRatio: 1),
-            itemCount: textLines.ads.length,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  Navigator.pushNamed(context, "/productdetail", arguments: {
-                    "product": textLines.ads[index],
-                  });
-                },
-                child: ProductCard(
-                  title: textLines.ads[index]['title'],
-                  price: textLines.ads[index]['price'],
-                  imageURL: textLines.ads[index]['images'][0],
-                ),
+          child: FutureBuilder(
+            future: AdService().fetchUserPosts(),
+            builder: ((context, snapshot) {
+              if (snapshot.hasData) {
+                List<Ad> ads = snapshot.data!;
+                return GridView.builder(
+                    padding: EdgeInsets.fromLTRB(20, 15, 15, 15),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 20,
+                        mainAxisSpacing: 15,
+                        childAspectRatio: 1),
+                    itemCount: textLines.ads.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, "/productdetail",
+                                arguments: {
+                                  "product": ads[index],
+                                });
+                          },
+                          child: ProductCard(
+                            title: ads[index].title!,
+                            price: ads[index].price!.toDouble(),
+                            image: ads[index].images![0],
+                          ));
+                    });
+              }
+              if (snapshot.hasError) {
+                return const Center(
+                  child: Text("Something wrong"),
+                );
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
               );
-            },
+            }),
           ),
         ),
       ),

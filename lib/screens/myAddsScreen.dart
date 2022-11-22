@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/custom_widgets/adCard.dart';
 
-import '../data/products.dart';
+import '../model/products.dart';
+import '../utils/strings.dart';
 
 class MyAdsScreen extends StatelessWidget {
   MyAdsScreen({super.key});
@@ -11,8 +12,12 @@ class MyAdsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Ads'),
-        leading: Icon(Icons.arrow_back),
+        title: Text(Strings.myAds),
+        leading: GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back)),
         backgroundColor: Colors.black,
       ),
       body: Column(children: [

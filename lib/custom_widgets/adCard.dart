@@ -37,51 +37,55 @@ class AdCard extends StatelessWidget {
             ),
           ),
           Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w600),
-                ),
-                SizedBox(
-                  height: 3,
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.access_alarm,
-                      size: 20.0,
-                      color: Color.fromARGB(255, 178, 178, 178),
-                      semanticLabel: 'Text to announce in accessibility modes',
-                    ),
-                    SizedBox(
-                      width: 3,
-                    ),
-                    Text(
-                      time,
-                      style: TextStyle(
-                        color: Color.fromARGB(255, 178, 178, 178),
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 6,
-                ),
-                Text(
-                  price.toString() + '.0',
-                  style: TextStyle(
-                    color: Color.fromRGBO(255, 129, 58, 1),
-                    fontSize: 18,
+            child: Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                        overflow: TextOverflow.ellipsis,
+                        color: Colors.black,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600),
                   ),
-                )
-              ],
+                  SizedBox(
+                    height: 3,
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.access_alarm,
+                        size: 20.0,
+                        color: Color.fromARGB(255, 178, 178, 178),
+                        semanticLabel:
+                            'Text to announce in accessibility modes',
+                      ),
+                      SizedBox(
+                        width: 3,
+                      ),
+                      Text(
+                        time,
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 178, 178, 178),
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 6,
+                  ),
+                  Text(
+                    price.toString() + '.0',
+                    style: TextStyle(
+                      color: Color.fromRGBO(255, 129, 58, 1),
+                      fontSize: 18,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ],

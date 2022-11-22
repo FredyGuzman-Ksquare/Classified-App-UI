@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/screens/homeScreen.dart';
 import 'package:go_router/go_router.dart';
 
+import '../custom_widgets/textFormField.dart';
+import '../utils/strings.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -21,28 +24,24 @@ class _MyWidgetState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(
-              height: 400,
+              height: 460,
               width: double.infinity,
               child: const Image(
-                image: AssetImage('graphics/butterfly.jpg'),
+                image: AssetImage(
+                  'graphics/flowers.jpg',
+                ),
+                fit: BoxFit.fill,
                 width: double.infinity,
               ),
             ),
             SizedBox(
-              height: 30,
+              height: 10,
             ),
             Container(
               margin: EdgeInsets.only(left: 15, right: 15),
               child: TextField(
                 controller: _emailCtrl,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(0))),
-                    labelText: "Email",
-                    labelStyle: TextStyle(
-                        fontSize: 25,
-                        color: Color.fromARGB(255, 230, 230, 230),
-                        fontWeight: FontWeight.w500)),
+                decoration: CustomTextForm().textFieldDecoration(Strings.email),
               ),
             ),
             SizedBox(
@@ -52,14 +51,8 @@ class _MyWidgetState extends State<LoginScreen> {
               margin: EdgeInsets.only(left: 15, right: 15),
               child: TextField(
                 controller: _passwordCtrl,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(0))),
-                    labelText: "Password",
-                    labelStyle: TextStyle(
-                        fontSize: 25,
-                        color: Color.fromARGB(255, 230, 230, 230),
-                        fontWeight: FontWeight.w500)),
+                decoration:
+                    CustomTextForm().textFieldDecoration(Strings.password),
               ),
             ),
             SizedBox(
@@ -77,12 +70,12 @@ class _MyWidgetState extends State<LoginScreen> {
                   style: ButtonStyle(
                     padding: MaterialStateProperty.all<EdgeInsets>(
                         const EdgeInsets.only(
-                            top: 15, bottom: 15, right: 25, left: 25)),
+                            top: 10, bottom: 10, right: 25, left: 25)),
                     backgroundColor: MaterialStateProperty.all<Color>(
                         const Color(0xffF25723)),
                   ),
                   child: const Text(
-                    "Login",
+                    Strings.login,
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
                   ),
                 ),
@@ -103,10 +96,10 @@ class _MyWidgetState extends State<LoginScreen> {
                   style: ButtonStyle(
                     padding: MaterialStateProperty.all<EdgeInsets>(
                         const EdgeInsets.only(
-                            top: 15, bottom: 15, right: 25, left: 25)),
+                            top: 10, bottom: 10, right: 25, left: 25)),
                   ),
                   child: const Text(
-                    "Don't have any account?",
+                    Strings.dontHaveAccount,
                     style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w700,

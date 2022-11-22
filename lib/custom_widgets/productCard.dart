@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../utils/constants.dart';
+
 class ProductCard extends StatelessWidget {
   String title;
-  int price;
-  String imageURL;
+  num price;
+  String image;
 
   ProductCard({
     super.key,
     required this.title,
     required this.price,
-    required this.imageURL,
+    required this.image,
   });
 
   @override
@@ -26,7 +28,14 @@ class ProductCard extends StatelessWidget {
                   color: Colors.white,
                   height: double.infinity,
                   width: double.infinity,
-                  child: Image.network(imageURL, fit: BoxFit.cover),
+                  child: Image.network(image, fit: BoxFit.cover, errorBuilder:
+                      (BuildContext context, Object exception,
+                          StackTrace? stackTrace) {
+                    return Image.network(
+                      Constants.defaultImage,
+                      fit: BoxFit.cover,
+                    );
+                  }),
                 ),
                 Container(
                   padding: EdgeInsets.all(10.0),
@@ -58,7 +67,7 @@ class ProductCard extends StatelessWidget {
                     alignment: Alignment.bottomCenter,
                     child: Container(
                       padding: EdgeInsets.all(8.0),
-                      height: 75,
+                      height: 80,
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: Colors.black.withOpacity(0.4),

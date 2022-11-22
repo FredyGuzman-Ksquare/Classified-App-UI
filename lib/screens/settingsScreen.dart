@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/custom_widgets/productCard.dart';
+import 'package:flutter_project/services/profile.dart';
+import 'package:flutter_project/utils/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../utils/alert_manager.dart';
+import '../utils/strings.dart';
+import '../utils/urlLauncher.dart';
 
 class SettingsScreen extends StatelessWidget {
   SettingsScreen({super.key});
-
-  openURL(url) async {
-    url = Uri.parse(url);
-    if (await launchUrl(url)) {
-      await canLaunchUrl(url);
-    } else {
-      print("Error");
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: Text('Ads Listing'),
+            title: Text(Strings.adsListing),
             leading: GestureDetector(
                 onTap: () {
                   Navigator.pop(context);
@@ -29,42 +26,57 @@ class SettingsScreen extends StatelessWidget {
             padding: EdgeInsets.only(left: 25, top: 25),
             child: Column(
               children: [
-                Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: AssetImage('graphics/logo.jpg'),
-                      backgroundColor: Color.fromARGB(255, 248, 248, 248),
-                      radius: 20,
-                    ),
-                    SizedBox(width: 20),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          "Fredy",
-                          style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "9621894299",
-                          style:
-                              TextStyle(fontSize: 18, color: Color(0xff898888)),
-                        )
-                      ],
-                    ),
-                    SizedBox(width: 120),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, "/editprofile");
-                        },
-                        child: Text('Edit',
-                            style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w700,
-                                color: Color(0xffF25723))))
-                  ],
-                ),
+                FutureBuilder(
+                    future: ProfileService().myUserPost(),
+                    builder: ((context, snapshot) {
+                      if (snapshot.hasData) {
+                        Map userData = snapshot.data!;
+
+                        return Row(
+                          children: [
+                            CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                  userData["imgURL"] ?? Constants.defaultImage),
+                              backgroundColor:
+                                  Color.fromARGB(255, 248, 248, 248),
+                              radius: 20,
+                            ),
+                            SizedBox(width: 20),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  userData['name'],
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  userData['phone'],
+                                  style: TextStyle(
+                                      fontSize: 18, color: Color(0xff898888)),
+                                )
+                              ],
+                            ),
+                            SizedBox(width: 80),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(context, "/editprofile");
+                                },
+                                child: Text(Strings.edit,
+                                    style: TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w700,
+                                        color: Color(0xffF25723))))
+                          ],
+                        );
+                      }
+                      if (snapshot.hasError) {
+                        AlertManager().displaySnackbar(context, "Error");
+                      }
+                      return CircularProgressIndicator();
+                    })),
                 SizedBox(height: 50),
                 GestureDetector(
                   onTap: () {
@@ -82,7 +94,7 @@ class SettingsScreen extends StatelessWidget {
                             color: Color(0xff898888),
                             Icons.playlist_add),
                         SizedBox(width: 40),
-                        Text("My Ads",
+                        Text(Strings.myAds,
                             style: TextStyle(
                                 fontSize: 22, fontWeight: FontWeight.bold)),
                       ],
@@ -91,7 +103,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    openURL('https://appmaking.com/about/');
+                    UrlLauncher().openURL(Strings.appMakingAbout);
                   },
                   child: Container(
                     padding: const EdgeInsets.only(
@@ -105,7 +117,7 @@ class SettingsScreen extends StatelessWidget {
                             color: Color(0xff898888),
                             Icons.person_outline),
                         SizedBox(width: 40),
-                        Text("About Us",
+                        Text(Strings.aboutUs,
                             style: TextStyle(
                                 fontSize: 22, fontWeight: FontWeight.bold)),
                       ],
@@ -114,7 +126,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    openURL("https://appmaking.com/contact");
+                    UrlLauncher().openURL(Strings.appMakingContact);
                   },
                   child: Container(
                     padding: const EdgeInsets.only(
@@ -128,7 +140,7 @@ class SettingsScreen extends StatelessWidget {
                             color: Color(0xff898888),
                             Icons.contact_phone_outlined),
                         SizedBox(width: 40),
-                        Text("Contact Us",
+                        Text(Strings.contactUs,
                             style: TextStyle(
                                 fontSize: 22, fontWeight: FontWeight.bold)),
                       ],
