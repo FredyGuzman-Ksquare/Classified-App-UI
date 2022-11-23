@@ -87,6 +87,8 @@ class CustomTextForm {
         return Strings.title;
       case 'price':
         return Strings.price;
+      case 'description':
+        return Strings.description;
       default:
         return "Write something";
     }

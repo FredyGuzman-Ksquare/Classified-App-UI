@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/custom_widgets/customText.dart';
 import 'package:flutter_project/services/ads.dart';
+import 'package:flutter_project/utils/alert_manager.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import '../model/ads.dart';
@@ -107,7 +108,13 @@ class _MyWidgetState extends State<CreateAdScreen> {
                       borderRadius: BorderRadius.circular(6.0),
                       boxShadow: [BoxShadow(color: Colors.blueAccent)]),
                   padding: EdgeInsets.all(24.0),
-                  child: AppImagePicker()),
+                  child: IconButton(
+                    icon: Icon(Icons.camera_alt),
+                    iconSize: 75.0,
+                    onPressed: () {
+                      captureImageFromGallery();
+                    },
+                  )),
               const SizedBox(
                 height: 15,
               ),
@@ -119,7 +126,7 @@ class _MyWidgetState extends State<CreateAdScreen> {
               const SizedBox(
                 height: 15,
               ),
-              CustomTextForm().generalTextField(_mobileCtrl, 'mobile'),
+              CustomTextForm().generalTextField(_mobileCtrl, 'phone'),
               const SizedBox(
                 height: 15,
               ),
@@ -133,10 +140,10 @@ class _MyWidgetState extends State<CreateAdScreen> {
                 width: double.infinity,
                 child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      creatAd();
                     },
                     style: CustomButton().customOrangeButton(),
-                    child: CustomText().customOrangeText(Strings.submitAd)),
+                    child: CustomText().customWhiteText(Strings.submitAd)),
               ),
               const SizedBox(
                 height: 10,

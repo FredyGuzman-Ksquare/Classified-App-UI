@@ -53,6 +53,7 @@ class _ProductDetailState extends State<ProductDetailScreen> {
             ),
             SizedBox(
               width: 500,
+              height: 400,
               child: GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, "/imageviewer", arguments: {
@@ -77,10 +78,7 @@ class _ProductDetailState extends State<ProductDetailScreen> {
                     SizedBox(
                       width: 2,
                     ),
-                    Text(
-                        DateCalculator()
-                            .daysAgo(widget.product.createdAt.toString())
-                            .toString(),
+                    Text(widget.product["product"].authorName!,
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 18,
@@ -98,7 +96,11 @@ class _ProductDetailState extends State<ProductDetailScreen> {
                     SizedBox(
                       width: 2,
                     ),
-                    Text(widget.product["product"]["createdAt"],
+                    Text(
+                        DateCalculator()
+                                .daysAgo(widget.product["product"].createdAt!)
+                                .toString() +
+                            " days ago",
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 18,
@@ -112,7 +114,7 @@ class _ProductDetailState extends State<ProductDetailScreen> {
             ),
             Container(
               margin: EdgeInsets.only(left: 15, right: 15),
-              child: Text(widget.product["product"]["description"],
+              child: Text(widget.product["product"].description!,
                   style: TextStyle(
                       color: Colors.black,
                       fontSize: 18,
@@ -126,11 +128,12 @@ class _ProductDetailState extends State<ProductDetailScreen> {
               padding: EdgeInsets.only(left: 15, right: 15),
               child: ElevatedButton(
                 onPressed: () {
-                  UrlLauncher().openURL(
-                      "tel:+${widget.product["product"]["contactNumber"]}");
+                  print("tel:${widget.product["product"].mobile}");
+                  UrlLauncher()
+                      .openURL("tel:+${widget.product["product"].mobile!}");
                 },
                 style: ElevatedButton.styleFrom(
-                    padding: CustomButton().buttonPadding(),
+                    //padding: CustomButton().buttonPadding(),
                     backgroundColor: Color(0xffF25723),
                     minimumSize: Size(150, 50)),
                 child: const Text(

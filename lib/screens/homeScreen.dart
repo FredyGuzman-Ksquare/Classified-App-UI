@@ -25,6 +25,7 @@ class HomeScreen extends StatelessWidget {
             builder: ((context, snapshot) {
               if (snapshot.hasData) {
                 List<Ad> ads = snapshot.data!;
+                //print(ads[0].);
                 return GridView.builder(
                     padding: EdgeInsets.fromLTRB(20, 15, 15, 15),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -32,7 +33,7 @@ class HomeScreen extends StatelessWidget {
                         crossAxisSpacing: 20,
                         mainAxisSpacing: 15,
                         childAspectRatio: 1),
-                    itemCount: textLines.ads.length,
+                    itemCount: ads.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
                           onTap: () {

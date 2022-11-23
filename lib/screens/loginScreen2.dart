@@ -20,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen1> {
   final TextEditingController _emailCtrl =
       TextEditingController(text: Strings.profileEmail);
   final TextEditingController _passwordCtrl =
-      TextEditingController(text: "252525");
+      TextEditingController(text: "1234");
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
 

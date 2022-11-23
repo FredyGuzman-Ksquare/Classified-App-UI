@@ -38,4 +38,12 @@ class CustomText {
             fontSize: 24,
             fontWeight: FontWeight.w700));
   }
+
+  customWhiteText(String text) {
+    return Text(text,
+        style: TextStyle(
+            color: const Color(0xffFFFFFF),
+            fontSize: 24,
+            fontWeight: FontWeight.w700));
+  }
 }

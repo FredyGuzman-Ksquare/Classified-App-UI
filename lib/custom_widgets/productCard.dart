@@ -6,12 +6,22 @@ class ProductCard extends StatelessWidget {
   String title;
   num price;
   String image;
+  /* String authorName;
+  String createdAt;
+  String description;
+  String mobile;
+  String images; */
 
   ProductCard({
     super.key,
     required this.title,
     required this.price,
     required this.image,
+    /* required this.authorName,
+    required this.createdAt,
+    required this.description,
+    required this.mobile,
+    required this.images, */
   });
 
   @override

@@ -31,6 +31,9 @@ class SettingsScreen extends StatelessWidget {
                     builder: ((context, snapshot) {
                       if (snapshot.hasData) {
                         Map userData = snapshot.data!;
+                        print("userData");
+                        print(userData);
+                        print(userData["imgURL"]);
 
                         return Row(
                           children: [
@@ -53,13 +56,13 @@ class SettingsScreen extends StatelessWidget {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  userData['phone'],
+                                  userData['mobile'],
                                   style: TextStyle(
                                       fontSize: 18, color: Color(0xff898888)),
                                 )
                               ],
                             ),
-                            SizedBox(width: 80),
+                            SizedBox(width: 40),
                             TextButton(
                                 onPressed: () {
                                   Navigator.pushNamed(context, "/editprofile");

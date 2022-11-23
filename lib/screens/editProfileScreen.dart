@@ -34,10 +34,6 @@ class _MyWidgetState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _nameCtrl.text = widget.data['name'];
-    _emailCtrl.text = widget.data['email'];
-    _mobileCtrl.text = widget.data['mobile'];
-
     return Scaffold(
         appBar: AppBar(
           title: Text(Strings.editProfile),
@@ -54,6 +50,7 @@ class _MyWidgetState extends State<EditProfileScreen> {
             future: ProfileService().myUserPost(),
             builder: ((context, snapshot) {
               if (snapshot.hasData) {
+                Map userData = snapshot.data!;
                 return SingleChildScrollView(
                   child: Center(
                       child: Container(
@@ -106,7 +103,7 @@ class _MyWidgetState extends State<EditProfileScreen> {
                                 : CircleAvatar(
                                     radius: 48,
                                     backgroundImage: NetworkImage(
-                                      widget.data['imgURL'],
+                                      userData['imgURL'],
                                     ),
                                   ),
                           ),
